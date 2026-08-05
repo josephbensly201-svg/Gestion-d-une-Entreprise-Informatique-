@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Kazo_Tech</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <div class="logo-container">
+                    <img src="assets/images/KZ Tech.png" alt="Logo KZ Tech" style="height: 45px; width: auto; margin-right: 10px;">
+                    <h1>Kazo<span>_Tech</span></h1>
+                </div>
+            </a>
+            <div class="top-nav-right" id="navRight">
+                <a href="signin.html" class="btn-login" id="loginBtn">
+                    <i class="fas fa-user"></i> Connexion
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> HOME</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> ABOUT</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tags"></i> PRICING</a></li>
+                <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> CONTACT</a></li>
+                <li><a href="signin.html"><i class="fas fa-sign-in-alt"></i> SIGN IN</a></li>
+                <li><a href="paynow.html"><i class="fas fa-credit-card"></i> PAY NOW</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Contactez-<span>Nous</span></h1>
+            <p>Nous sommes à votre écoute pour répondre à toutes vos questions</p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-form-container">
+                    <h2>Envoyez-nous un <span>message</span></h2>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nom">Nom</label>
+                                <input type="text" id="nom" name="nom" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="prenom">Prénom</label>
+                                <input type="text" id="prenom" name="prenom" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Courriel</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telephone">Téléphone</label>
+                                <input type="tel" id="telephone" name="telephone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sujet">Sujet</label>
+                            <input type="text" id="sujet" name="sujet" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Envoyer le message</button>
+                    </form>
+                    <div id="formMessage" class="form-message"></div>
+                </div>
+                <div class="contact-info">
+                    <h2>Nos <span>Coordonnées</span></h2>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Adresse</h4>
+                            <p>123, Rue des Technologies<br>Cap-Haitien, Haïti</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Téléphone</h4>
+                            <p>+509 41460815</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>KazoTech@.ht</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Horaires</h4>
+                            <p>Lundi - Vendredi: 8h - 18h</p>
+                            <p>Samedi: 9h - 13h</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kazo_Tech</h3>
+                    <p>Votre partenaire de confiance pour vos solutions informatiques.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="pricing.html">Développement Web</a></li>
+                        <li><a href="pricing.html">Base de Données</a></li>
+                        <li><a href="pricing.html">Sécurité</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> +509 41460815</p>
+                    <p><i class="fas fa-envelope"></i> KazoTech@.ht</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Cap-Haitien, Haïti</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kazo_Tech. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

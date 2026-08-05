@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique paiements - Kazo_Tech</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <div class="logo-container">
+                    <img src="assets/images/KZ Tech.png" alt="Logo KZ Tech" style="height: 45px; width: auto; margin-right: 10px;">
+                    <h1>Kazo<span>_Tech</span></h1>
+                </div>
+            </a>
+            <div class="top-nav-right" id="navRight">
+                <a href="#" class="btn-login" id="loginBtn">
+                    <i class="fas fa-user"></i> Connexion
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> À Propos</a></li>
+                <li><a href="client-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profil</a></li>
+                <li><a href="client-services.html"><i class="fas fa-shopping-bag"></i> Mes services</a></li>
+                <li><a href="payment-history.html" class="active"><i class="fas fa-credit-card"></i> Historique</a></li>
+                <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Historique <span>des paiements</span></h1>
+            <p>Retrouvez tous vos paiements effectués</p>
+        </div>
+    </section>
+
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-sidebar">
+                    <div class="profile-avatar" id="profileAvatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3 id="profileName">Utilisateur</h3>
+                    <p id="profileEmailDisplay">email@example.com</p>
+                    <div class="profile-menu">
+                        <a href="profile.html"><i class="fas fa-user"></i> Mon profil</a>
+                        <a href="client-services.html"><i class="fas fa-shopping-bag"></i> Mes services</a>
+                        <a href="payment-history.html" class="active"><i class="fas fa-credit-card"></i> Historique paiements</a>
+                        <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                    </div>
+                </div>
+                <div class="profile-content">
+                    <h2>Historique <span>des paiements</span></h2>
+                    <div id="paymentHistory"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kazo_Tech</h3>
+                    <p>Votre partenaire de confiance pour vos solutions informatiques.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> +509 41460815</p>
+                    <p><i class="fas fa-envelope"></i> KazoTech@.ht</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kazo_Tech. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

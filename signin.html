@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Kazo_Tech</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <div class="logo-container">
+                    <img src="assets/images/KZ Tech.png" alt="Logo KZ Tech" style="height: 45px; width: auto; margin-right: 10px;">
+                    <h1>Kazo<span>_Tech</span></h1>
+                </div>
+            </a>
+            <div class="top-nav-right" id="navRight">
+                <a href="signin.html" class="btn-login" id="loginBtn">
+                    <i class="fas fa-user"></i> Connexion
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> À Propos</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tags"></i> Tarifs</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="paynow.html"><i class="fas fa-credit-card"></i> Payer</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1><span>Connexion</span></h1>
+            <p>Accédez à votre espace client ou administrateur</p>
+        </div>
+    </section>
+
+    <section class="signin-section">
+        <div class="container">
+            <div class="signin-container">
+
+                <div class="signin-tabs">
+                    <button class="tab-btn active" data-tab="login">Connexion</button>
+                    <button class="tab-btn" data-tab="register">Inscription</button>
+                </div>
+
+                <!-- ===== CONNEXION ===== -->
+                <div id="login" class="signin-form active">
+                    <h2>Connectez-vous</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail"><i class="fas fa-envelope"></i> Courriel</label>
+                            <input type="email" id="loginEmail" placeholder="exemple@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword"><i class="fas fa-lock"></i> Mot de passe</label>
+                            <input type="password" id="loginPassword" placeholder="Votre mot de passe" required>
+                        </div>
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" id="rememberMe"> Se souvenir de moi
+                            </label>
+                            <a href="#" class="forgot-password" onclick="switchTab('reset')">Mot de passe oublié ?</a>
+                        </div>
+                        <button type="submit" class="btn-primary">Se connecter</button>
+                    </form>
+                    <div id="loginMessage" class="form-message"></div>
+                </div>
+
+                <!-- ===== INSCRIPTION AVEC FOTO ===== -->
+                <div id="register" class="signin-form">
+                    <h2>Créer un compte</h2>
+                    <form id="registerForm">
+                        
+                        <!-- UPLOAD FOTO -->
+                        <div class="form-group">
+                            <label>Photo de profil</label>
+                            <div class="photo-upload">
+                                <div class="photo-preview" id="photoPreview">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <input type="file" id="regPhoto" accept="image/*" onchange="previewPhoto(event)">
+                                <label for="regPhoto" class="btn-upload">
+                                    <i class="fas fa-camera"></i> Choisir une photo
+                                </label>
+                                <small class="form-hint">Format: JPG, PNG, GIF (max 2MB)</small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="regNom"><i class="fas fa-user"></i> Nom</label>
+                                <input type="text" id="regNom" placeholder="Dupont" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regPrenom"><i class="fas fa-user"></i> Prénom</label>
+                                <input type="text" id="regPrenom" placeholder="Jean" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="regEmail"><i class="fas fa-envelope"></i> Courriel</label>
+                            <input type="email" id="regEmail" placeholder="jean.dupont@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="regTelephone"><i class="fas fa-phone"></i> Téléphone</label>
+                            <input type="tel" id="regTelephone" placeholder="+509 1234 5678">
+                        </div>
+                        <div class="form-group">
+                            <label for="regAdresse"><i class="fas fa-map-marker-alt"></i> Adresse</label>
+                            <input type="text" id="regAdresse" placeholder="123, Rue des Technologies">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="regPassword"><i class="fas fa-lock"></i> Mot de passe</label>
+                                <input type="password" id="regPassword" placeholder="Minimum 8 caractères" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regPasswordConfirm"><i class="fas fa-check"></i> Confirmer</label>
+                                <input type="password" id="regPasswordConfirm" placeholder="Confirmer" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="regRole"><i class="fas fa-user-tag"></i> Type de compte</label>
+                            <select id="regRole">
+                                <option value="client">Client</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="terms">
+                                <input type="checkbox" id="termsCheck" required>
+                                J'accepte les <a href="#" onclick="alert('Conditions générales d\'utilisation')">conditions générales</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn-primary">S'inscrire</button>
+                    </form>
+                    <div id="registerMessage" class="form-message"></div>
+                </div>
+                <!-- ===== RESET MOT DE PASSE ===== -->
+                <div id="reset" class="signin-form">
+                    <h2>Réinitialiser <span style="color: var(--primary);">mot de passe</span></h2>
+                    <p style="color: var(--text-gray); text-align: center; margin-bottom: 20px;">
+                        Entrez votre adresse email pour recevoir un lien de réinitialisation.
+                    </p>
+                    <form id="resetForm">
+                        <div class="form-group">
+                            <label for="resetEmail"><i class="fas fa-envelope"></i> Courriel</label>
+                            <input type="email" id="resetEmail" placeholder="exemple@email.com" required>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i> Envoyer le lien
+                        </button>
+                    </form>
+                    <div id="resetMessage" class="form-message"></div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="#" onclick="switchTab('login')" style="color: var(--primary);">
+                            <i class="fas fa-arrow-left"></i> Retour à la connexion
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kazo_Tech</h3>
+                    <p>Votre partenaire de confiance pour vos solutions informatiques.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="pricing.html">Développement Web</a></li>
+                        <li><a href="pricing.html">Base de Données</a></li>
+                        <li><a href="pricing.html">Sécurité</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> +509 41460815</p>
+                    <p><i class="fas fa-envelope"></i> KazoTech@.ht</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kazo_Tech. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement - Kazo_Tech</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <div class="logo-container">
+                    <img src="assets/images/KZ Tech.png" alt="Logo KZ Tech" style="height: 45px; width: auto; margin-right: 10px;">
+                    <h1>Kazo<span>_Tech</span></h1>
+                </div>
+            </a>
+            <div class="top-nav-right" id="navRight">
+                <a href="signin.html" class="btn-login" id="loginBtn">
+                    <i class="fas fa-user"></i> Connexion
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> HOME</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> ABOUT</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tags"></i> PRICING</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a></li>
+                <li><a href="paynow.html" class="active"><i class="fas fa-credit-card"></i> PAY NOW</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Paiement <span>en ligne</span></h1>
+            <p>Réglez vos services en toute sécurité</p>
+        </div>
+    </section>
+
+    <section class="payment-section">
+        <div class="container">
+            <div class="payment-grid">
+                <div class="payment-summary">
+                    <h2>Récapitulatif de votre <span>commande</span></h2>
+                    <div id="paymentItems">
+                        <p class="empty-cart">Aucun service dans votre panier</p>
+                    </div>
+                    <div class="payment-total">
+                        <h3>Total à payer: <span id="paymentTotal">0.00</span> $</h3>
+                    </div>
+                </div>
+
+                <div class="payment-form-container">
+                    <h2>Méthode de <span>paiement</span></h2>
+                    
+                    <!-- METHODES DE PAIEMENT: PAYPAL & STRIPE -->
+                    <div class="payment-methods">
+                        <button class="payment-method active" data-method="paypal" onclick="switchPaymentMethod('paypal')">
+                            <i class="fab fa-paypal"></i> PayPal
+                        </button>
+                        <button class="payment-method" data-method="stripe" onclick="switchPaymentMethod('stripe')">
+                            <i class="fab fa-stripe-s"></i> Stripe
+                        </button>
+                    </div>
+
+                    <form id="paymentForm" onsubmit="event.preventDefault(); processPayment();">
+
+                        <!-- PAYPAL -->
+                        <div id="paypalPayment" class="payment-details active">
+                            <div class="payment-info-box">
+                                <div class="payment-icon-large">
+                                    <i class="fab fa-paypal"></i>
+                                </div>
+                                <h3>Paiement via PayPal</h3>
+                                <p>Vous serez redirigé vers PayPal pour finaliser votre paiement en toute sécurité.</p>
+                                <ul class="payment-benefits">
+                                    <li><i class="fas fa-check"></i> Paiement sécurisé</li>
+                                    <li><i class="fas fa-check"></i> Protection des acheteurs</li>
+                                    <li><i class="fas fa-check"></i> Pas besoin de compte PayPal</li>
+                                </ul>
+                                <button type="button" class="btn-primary payment-btn" onclick="processPayPal()">
+                                    <i class="fab fa-paypal"></i> Payer avec PayPal
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STRIPE -->
+                        <div id="stripePayment" class="payment-details">
+                            <div class="payment-info-box">
+                                <div class="payment-icon-large">
+                                    <i class="fab fa-stripe-s"></i>
+                                </div>
+                                <h3>Paiement via Stripe</h3>
+                                <p>Paiement sécurisé par carte bancaire via Stripe. Vos données sont cryptées.</p>
+                                <ul class="payment-benefits">
+                                    <li><i class="fas fa-check"></i> Cryptage SSL</li>
+                                    <li><i class="fas fa-check"></i> Paiement sécurisé</li>
+                                    <li><i class="fas fa-check"></i> Accepte toutes les cartes</li>
+                                </ul>
+                                <button type="button" class="btn-primary payment-btn" onclick="processStripe()">
+                                    <i class="fab fa-stripe-s"></i> Payer avec Stripe
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div id="paymentMessage" class="payment-message"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL CONFIRMATION -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-check-circle" style="color: #28a745;"></i> Paiement confirmé !</h2>
+            </div>
+            <div class="modal-body">
+                <p>Votre paiement a été effectué avec succès.</p>
+                <p>Un reçu a été envoyé à votre adresse email.</p>
+                <div class="receipt-info">
+                    <p><strong>Transaction ID:</strong> <span id="transactionId">TXN-2024-001</span></p>
+                    <p><strong>Montant:</strong> <span id="receiptAmount">0.00</span> $</p>
+                    <p><strong>Date:</strong> <span id="receiptDate"></span></p>
+                    <p><strong>Méthode:</strong> <span id="receiptMethod">PayPal</span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" onclick="closeModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kazo_Tech</h3>
+                    <p>Votre partenaire de confiance pour vos solutions informatiques.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="pricing.html">Développement Web</a></li>
+                        <li><a href="pricing.html">Base de Données</a></li>
+                        <li><a href="pricing.html">Sécurité</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> +509 41460815</p>
+                    <p><i class="fas fa-envelope"></i> KazoTech@.ht</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Cap-Haitien, Haïti</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kazo_Tech. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
