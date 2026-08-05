@@ -1,0 +1,316 @@
+/* ========================================
+   RESPONSIVE.CSS - STYLES RESPONSIVE
+   ======================================== */
+
+/* === TABLETTES (max-width: 992px) === */
+@media (max-width: 992px) {
+    .hero .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .about-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .profile-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-sidebar {
+        padding: 30px 20px;
+    }
+    
+    .profile-content {
+        padding: 25px;
+    }
+}
+
+/* === MOBILES (max-width: 768px) === */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--secondary);
+        position: absolute;
+        top: 52px;
+        left: 0;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        z-index: 999;
+    }
+    
+    .nav-menu.open {
+        display: flex;
+    }
+    
+    .nav-menu li a {
+        padding: 12px 20px;
+        width: 100%;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        border-left: 3px solid transparent;
+    }
+    
+    .nav-menu li a.active {
+        border-left-color: var(--primary);
+    }
+    
+    .nav-toggle {
+        display: flex;
+    }
+    
+    .hero-content h1 {
+        font-size: 32px;
+    }
+    
+    .signin-container {
+        padding: 20px;
+    }
+    
+    .signin-form .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-form .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .admin-tabs {
+        flex-direction: column;
+    }
+    
+    .admin-client-card,
+    .admin-service-card,
+    .admin-user-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .admin-client-card .client-actions,
+    .admin-service-card .service-actions,
+    .admin-user-card .user-actions {
+        justify-content: flex-start;
+    }
+    
+    .admin-message-card .message-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .admin-message-card .message-date {
+        margin-left: 0;
+    }
+    
+    .quick-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    /* User Dashboard */
+    .profile-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: -50px;
+        padding: 0 15px 15px;
+    }
+    
+    .profile-avatar-large {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .profile-avatar-large i {
+        font-size: 60px;
+    }
+    
+    .profile-details {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    
+    .profile-details h2 {
+        font-size: 22px;
+    }
+    
+    .user-nav {
+        padding: 0 15px;
+        justify-content: flex-start;
+    }
+    
+    .user-nav a {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+    
+    .dashboard-content {
+        padding: 20px 15px;
+    }
+    
+    .dashboard-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .stat-item {
+        padding: 15px;
+    }
+    
+    .stat-number {
+        font-size: 22px;
+    }
+}
+
+/* === PETITS MOBILES (max-width: 480px) === */
+@media (max-width: 480px) {
+    .logo-container h1 {
+        font-size: 18px;
+    }
+    
+    .logo-container img {
+        height: 35px !important;
+    }
+    
+    .btn-login {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+    
+    .hero-content h1 {
+        font-size: 26px;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-methods {
+        flex-wrap: wrap;
+    }
+    
+    .payment-method {
+        flex: 1 1 45%;
+    }
+    
+    .page-header h1 {
+        font-size: 28px;
+    }
+    
+    .section-title {
+        font-size: 26px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .stat-card {
+        padding: 15px;
+    }
+    
+    .stat-card h3 {
+        font-size: 22px;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .signin-tabs .tab-btn {
+        font-size: 13px;
+        padding: 10px;
+    }
+    
+    .quick-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* User Dashboard */
+    .cover-image {
+        height: 120px;
+    }
+    
+    .profile-avatar-large {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .profile-avatar-large i {
+        font-size: 50px;
+    }
+    
+    .profile-details h2 {
+        font-size: 18px;
+    }
+    
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .user-nav a {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+    
+    .user-nav a span {
+        display: none;
+    }
+}
+
+/* === TRES PETITS EKRAN (max-width: 360px) === */
+@media (max-width: 360px) {
+    .logo-container h1 {
+        font-size: 15px;
+    }
+    
+    .logo-container img {
+        height: 30px !important;
+    }
+    
+    .btn-login {
+        padding: 4px 10px;
+        font-size: 11px;
+    }
+    
+    .hero-content h1 {
+        font-size: 22px;
+    }
+}

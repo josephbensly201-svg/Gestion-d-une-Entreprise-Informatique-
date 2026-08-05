@@ -1,0 +1,409 @@
+/* ========================================
+   ADMIN.CSS - STYLES DASHBOARD ADMIN
+   ======================================== */
+
+/* === STATISTIQUES === */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.stat-card {
+    background: var(--white);
+    padding: 25px 20px;
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border-bottom: 4px solid var(--primary);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.stat-card i {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.stat-card h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.stat-card p {
+    color: var(--text-gray);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* === ADMIN TABS === */
+.admin-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 30px;
+    background: var(--light-bg);
+    border-radius: var(--radius);
+    padding: 5px;
+}
+
+.admin-tab {
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--radius);
+    background: transparent;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-gray);
+}
+
+.admin-tab:hover {
+    background: rgba(33, 131, 233, 0.08);
+    color: var(--primary);
+}
+
+.admin-tab.active {
+    background: var(--primary);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(33, 131, 233, 0.3);
+}
+
+.admin-panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.admin-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.admin-panel h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.admin-panel h3 i {
+    color: var(--primary);
+    margin-right: 10px;
+}
+
+/* === ADD SERVICE FORM === */
+.add-service-form {
+    background: var(--light-bg);
+    padding: 25px;
+    border-radius: var(--radius);
+    margin-bottom: 30px;
+}
+
+.add-service-form h4 {
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+/* === ADMIN CARDS === */
+.admin-client-card,
+.admin-service-card,
+.admin-user-card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    transition: var(--transition);
+}
+
+.admin-client-card:hover,
+.admin-service-card:hover,
+.admin-user-card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.admin-client-card .client-info,
+.admin-service-card .service-info,
+.admin-user-card .user-info {
+    flex: 1;
+}
+
+.admin-client-card .client-info h4,
+.admin-service-card .service-info h4,
+.admin-user-card .user-info h4 {
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+
+.admin-client-card .client-info p,
+.admin-service-card .service-info p,
+.admin-user-card .user-info p {
+    font-size: 14px;
+    color: var(--text-gray);
+    margin: 3px 0;
+}
+
+.admin-client-card .client-info p i,
+.admin-user-card .user-info p i {
+    width: 18px;
+    color: var(--primary);
+}
+
+.admin-client-card .client-actions,
+.admin-service-card .service-actions,
+.admin-user-card .user-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* === SETTINGS FORM === */
+.settings-form {
+    background: var(--light-bg);
+    padding: 25px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+}
+
+.settings-form h4 {
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+.settings-info {
+    border-left: 4px solid var(--primary);
+}
+
+.settings-info h4 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.settings-info p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: var(--text-gray);
+}
+
+.settings-info p strong {
+    color: var(--text-dark);
+    display: inline-block;
+    width: 100px;
+}
+
+/* === STATUS BADGE === */
+.status-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-badge.actif {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-badge.inactif {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-badge.bloque {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-badge.lu {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-badge.non_lu {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.status-badge.reussi {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-badge.en_attente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-badge.payé {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* === BUTTONS SMALL === */
+.btn-small {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    background: var(--light-bg);
+    color: var(--text-dark);
+}
+
+.btn-small:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.btn-small.btn-danger {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.btn-small.btn-danger:hover {
+    background: #dc3545;
+    color: var(--white);
+}
+
+/* === MESSAGES === */
+.admin-message-card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 15px;
+    border-left: 4px solid #ced4da;
+    transition: var(--transition);
+}
+
+.admin-message-card.unread {
+    border-left-color: var(--primary);
+    background: rgba(33, 131, 233, 0.03);
+}
+
+.admin-message-card .message-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.admin-message-card .message-header h4 {
+    margin: 0;
+    color: var(--text-dark);
+}
+
+.admin-message-card .message-date {
+    font-size: 13px;
+    color: var(--text-gray);
+    margin-left: auto;
+}
+
+.admin-message-card .message-body p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: var(--text-gray);
+}
+
+.admin-message-card .message-text {
+    background: var(--light-bg);
+    padding: 12px 15px;
+    border-radius: var(--radius);
+    margin-top: 8px;
+    color: var(--text-dark) !important;
+    line-height: 1.6;
+}
+
+.admin-message-card .message-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+/* === PAYMENTS === */
+.admin-payment-card {
+    background: var(--white);
+    padding: 15px 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 10px;
+}
+
+.admin-payment-card .payment-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    font-size: 14px;
+}
+
+.admin-payment-card .payment-id {
+    font-family: monospace;
+    background: var(--light-bg);
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* BOUTON DECONNEXION */
+
+.logout-tab {
+    color: #dc3545 !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+    margin-left: 5px;
+}
+
+.logout-tab:hover {
+    background: rgba(220, 53, 69, 0.08) !important;
+    color: #dc3545 !important;
+}
+
+.logout-tab i {
+    color: #dc3545;
+}
+
+/* BOUTON PROMOUVOIR EN ADMIN */
+
+.btn-promote {
+    background: #ffc107 !important;
+    color: #212529 !important;
+}
+
+.btn-promote:hover {
+    background: #e0a800 !important;
+    color: #212529 !important;
+}
+
+.btn-promote i {
+    color: #212529 !important;
+}
+
+/* Admin badge nan lis itilizate yo */
+.admin-user-card .user-info h4 .fa-star {
+    color: #ffc107;
+    font-size: 14px;
+    margin-left: 5px;
+}
