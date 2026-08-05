@@ -1,8 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // ========================================
-    // ===== MENU MOBILE =====
-    // ========================================
+    // Création du compte administrateur par défaut si aucun n'existe
+    function createDefaultAdmin() {
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const adminExists = users.some(u => u.email === 'kazotech@gmail.com');
+        
+        if (!adminExists) {
+            const defaultAdmin = {
+                id: 'admin_' + Date.now(),
+                nom: 'Kazo',
+                prenom: 'Tech',
+                email: 'kazotech@gmail.com',
+                password: 'kazo@1234',
+                telephone: '+509 4146 0815',
+                adresse: 'Cap-Haitien, Haïti',
+                role: 'admin',
+                photo: '',
+                date_creation: new Date().toISOString(),
+                statut: 'actif'
+            };
+            
+            users.push(defaultAdmin);
+            localStorage.setItem('users', JSON.stringify(users));
+            console.log('Administrateur par défaut créé');
+            console.log('Email: kazotech@gmail.com');
+            console.log('Mot de passe: kazo@1234');
+        }
+    }
+    
+    createDefaultAdmin();
+
+    // Menu mobile
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
 
@@ -20,10 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ========================================
-    // ===== GESTION DES UTILISATEURS =====
-    // ========================================
-
+    // Gestion des onglets dans le formulaire de connexion
     window.switchTab = function(tabId) {
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabForms = document.querySelectorAll('.signin-form');
@@ -49,23 +74,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ========================================
-    // ===== PHOTO UPLOAD FUNCTIONS =====
-    // ========================================
-
+    // Fonctions pour gérer l'upload de photos de profil
     window.previewPhoto = function(event) {
         const file = event.target.files[0];
         if (!file) return;
         
         if (file.size > 2 * 1024 * 1024) {
-            alert('❌ La photo ne doit pas dépasser 2MB.');
+            alert('La photo ne doit pas dépasser 2MB.');
             event.target.value = '';
             return;
         }
         
         const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
         if (!allowedTypes.includes(file.type)) {
-            alert('❌ Format non supporté. Utilisez JPG, PNG, GIF ou WEBP.');
+            alert('Format non supporté. Utilisez JPG, PNG, GIF ou WEBP.');
             event.target.value = '';
             return;
         }
@@ -84,14 +106,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!file) return;
         
         if (file.size > 2 * 1024 * 1024) {
-            alert('❌ La photo ne doit pas dépasser 2MB.');
+            alert('La photo ne doit pas dépasser 2MB.');
             event.target.value = '';
             return;
         }
         
         const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
         if (!allowedTypes.includes(file.type)) {
-            alert('❌ Format non supporté. Utilisez JPG, PNG, GIF ou WEBP.');
+            alert('Format non supporté. Utilisez JPG, PNG, GIF ou WEBP.');
             event.target.value = '';
             return;
         }
@@ -110,14 +132,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!file) return;
         
         if (file.size > 2 * 1024 * 1024) {
-            alert('❌ La photo ne doit pas dépasser 2MB.');
+            alert('La photo ne doit pas dépasser 2MB.');
             event.target.value = '';
             return;
         }
         
         const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
         if (!allowedTypes.includes(file.type)) {
-            alert('❌ Format non supporté. Utilisez JPG, PNG, GIF ou WEBP.');
+            alert('Format non supporté. Utilisez JPG, PNG, GIF ou WEBP.');
             event.target.value = '';
             return;
         }
@@ -131,10 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
         reader.readAsDataURL(file);
     };
 
-    // ========================================
-    // ===== INSCRIPTION =====
-    // ========================================
-
+    // Inscription des nouveaux utilisateurs
     const registerForm = document.getElementById('registerForm');
     if (registerForm) {
         registerForm.addEventListener('submit', function(e) {
@@ -157,28 +176,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (!nom || !prenom || !email || !password || !confirm) {
                 messageEl.className = 'form-message error';
-                messageEl.textContent = '❌ Veuillez remplir tous les champs obligatoires.';
+                messageEl.textContent = 'Veuillez remplir tous les champs obligatoires.';
                 messageEl.style.display = 'block';
                 return;
             }
 
             if (password.length < 8) {
                 messageEl.className = 'form-message error';
-                messageEl.textContent = '❌ Le mot de passe doit contenir au moins 8 caractères.';
+                messageEl.textContent = 'Le mot de passe doit contenir au moins 8 caractères.';
                 messageEl.style.display = 'block';
                 return;
             }
 
             if (password !== confirm) {
                 messageEl.className = 'form-message error';
-                messageEl.textContent = '❌ Les mots de passe ne correspondent pas.';
+                messageEl.textContent = 'Les mots de passe ne correspondent pas.';
                 messageEl.style.display = 'block';
                 return;
             }
 
             if (!terms) {
                 messageEl.className = 'form-message error';
-                messageEl.textContent = '❌ Vous devez accepter les conditions générales.';
+                messageEl.textContent = 'Vous devez accepter les conditions générales.';
                 messageEl.style.display = 'block';
                 return;
             }
@@ -186,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const users = JSON.parse(localStorage.getItem('users')) || [];
             if (users.find(u => u.email === email)) {
                 messageEl.className = 'form-message error';
-                messageEl.textContent = '❌ Cet email est déjà utilisé.';
+                messageEl.textContent = 'Cet email est déjà utilisé.';
                 messageEl.style.display = 'block';
                 return;
             }
@@ -208,7 +227,6 @@ document.addEventListener('DOMContentLoaded', function() {
             users.push(newUser);
             localStorage.setItem('users', JSON.stringify(users));
 
-            // Connecter automatiquement apre inscription
             localStorage.setItem('currentUser', JSON.stringify({
                 id: newUser.id,
                 nom: newUser.nom,
@@ -220,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }));
 
             messageEl.className = 'form-message success';
-            messageEl.textContent = '✅ Inscription réussie ! Redirection en cours...';
+            messageEl.textContent = 'Inscription réussie ! Redirection en cours...';
             messageEl.style.display = 'block';
 
             window.regPhotoData = '';
@@ -237,10 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ========================================
-    // ===== CONNEXION =====
-    // ========================================
-
+    // Connexion des utilisateurs
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
@@ -255,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (!email || !password) {
                 messageEl.className = 'form-message error';
-                messageEl.textContent = '❌ Veuillez remplir tous les champs.';
+                messageEl.textContent = 'Veuillez remplir tous les champs.';
                 messageEl.style.display = 'block';
                 return;
             }
@@ -266,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (user) {
                 if (user.statut === 'bloque') {
                     messageEl.className = 'form-message error';
-                    messageEl.textContent = '❌ Votre compte a été bloqué. Veuillez contacter l\'administrateur.';
+                    messageEl.textContent = 'Votre compte a été bloqué. Veuillez contacter l\'administrateur.';
                     messageEl.style.display = 'block';
                     return;
                 }
@@ -282,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }));
 
                 messageEl.className = 'form-message success';
-                messageEl.textContent = '✅ Connexion réussie ! Redirection en cours...';
+                messageEl.textContent = 'Connexion réussie ! Redirection en cours...';
                 messageEl.style.display = 'block';
 
                 this.reset();
@@ -297,16 +312,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             } else {
                 messageEl.className = 'form-message error';
-                messageEl.textContent = '❌ Email ou mot de passe incorrect.';
+                messageEl.textContent = 'Email ou mot de passe incorrect.';
                 messageEl.style.display = 'block';
             }
         });
     }
 
-    // ========================================
-    // ===== RESET MOT DE PASSE =====
-    // ========================================
-
+    // Réinitialisation du mot de passe
     const resetForm = document.getElementById('resetForm');
     if (resetForm) {
         resetForm.addEventListener('submit', function(e) {
@@ -320,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (!email) {
                 messageEl.className = 'form-message error';
-                messageEl.textContent = '❌ Veuillez entrer votre adresse email.';
+                messageEl.textContent = 'Veuillez entrer votre adresse email.';
                 messageEl.style.display = 'block';
                 return;
             }
@@ -334,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('users', JSON.stringify(users));
 
                 messageEl.className = 'form-message success';
-                messageEl.innerHTML = '✅ Un lien de réinitialisation a été envoyé à <strong>' + email + '</strong>.<br><br><strong>Nouveau mot de passe temporaire :</strong> ' + newPassword;
+                messageEl.innerHTML = 'Un lien de réinitialisation a été envoyé à <strong>' + email + '</strong>.<br><br><strong>Nouveau mot de passe temporaire :</strong> ' + newPassword;
                 messageEl.style.display = 'block';
 
                 this.reset();
@@ -346,16 +358,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             } else {
                 messageEl.className = 'form-message error';
-                messageEl.textContent = '❌ Aucun compte trouvé avec cet email.';
+                messageEl.textContent = 'Aucun compte trouvé avec cet email.';
                 messageEl.style.display = 'block';
             }
         });
     }
 
-    // ========================================
-    // ===== DÉCONNEXION =====
-    // ========================================
-
+    // Déconnexion
     window.logout = function() {
         if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
             localStorage.removeItem('currentUser');
@@ -363,10 +372,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // ========================================
-    // ===== VÉRIFIER SESSION =====
-    // ========================================
-
+    // Vérification de la session
     window.getCurrentUser = function() {
         return JSON.parse(localStorage.getItem('currentUser'));
     };
@@ -403,10 +409,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     };
 
-    // ========================================
-    // ===== AFFICHER BOUTON LOGIN & NAVIGATION =====
-    // ========================================
-
+    // Mise à jour du bouton de connexion et de la navigation
     function updateLoginButton() {
         const currentUser = getCurrentUser();
         const loginBtn = document.getElementById('loginBtn');
@@ -424,7 +427,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 photoHtml = `<i class="fas fa-user-circle"></i>`;
             }
             
-            // Afiche foto + role (san nom)
             loginBtn.innerHTML = `
                 ${photoHtml}
                 <span style="font-size: 11px; background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 10px; margin-left: 5px;">
@@ -437,7 +439,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = isAdmin ? 'admin-dashboard.html' : 'client-dashboard.html';
             };
         } else {
-            // Si pa konekte, montre "Connexion"
             loginBtn.innerHTML = `<i class="fas fa-user"></i> Connexion`;
             loginBtn.href = 'signin.html';
             loginBtn.onclick = null;
@@ -450,7 +451,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (!navMenu) return;
         
-        // Liens de base (toujou prezan) - SANS SIGN IN
         let navLinks = `
             <li><a href="index.html" class="${window.location.pathname.includes('index') ? 'active' : ''}"><i class="fas fa-home"></i> HOME</a></li>
             <li><a href="about.html" class="${window.location.pathname.includes('about') ? 'active' : ''}"><i class="fas fa-info-circle"></i> ABOUT</a></li>
@@ -458,7 +458,6 @@ document.addEventListener('DOMContentLoaded', function() {
             <li><a href="contact.html" class="${window.location.pathname.includes('contact') ? 'active' : ''}"><i class="fas fa-envelope"></i> CONTACT</a></li>
         `;
 
-        // Si konekte: ajoute Dashboard
         if (currentUser) {
             if (currentUser.role === 'admin') {
                 navLinks += `
@@ -471,7 +470,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // PAY NOW toujou prezan
         navLinks += `
             <li><a href="paynow.html" class="${window.location.pathname.includes('paynow') ? 'active' : ''}"><i class="fas fa-credit-card"></i> PAY NOW</a></li>
         `;
@@ -484,10 +482,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateNavMenu();
     }
 
-    // ========================================
-    // ===== GESTION DU PROFIL CLIENT =====
-    // ========================================
-
+    // Gestion du profil client
     window.loadProfile = function() {
         const currentUser = getCurrentUser();
         if (!currentUser) {
@@ -527,7 +522,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.saveProfile = function() {
         const currentUser = getCurrentUser();
         if (!currentUser) {
-            alert('❌ Veuillez vous connecter.');
+            alert('Veuillez vous connecter.');
             return;
         }
 
@@ -543,7 +538,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!nom || !prenom || !email) {
             messageEl.className = 'form-message error';
-            messageEl.textContent = '❌ Nom, prénom et email sont obligatoires.';
+            messageEl.textContent = 'Nom, prénom et email sont obligatoires.';
             messageEl.style.display = 'block';
             return;
         }
@@ -553,7 +548,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (userIndex === -1) {
             messageEl.className = 'form-message error';
-            messageEl.textContent = '❌ Utilisateur non trouvé.';
+            messageEl.textContent = 'Utilisateur non trouvé.';
             messageEl.style.display = 'block';
             return;
         }
@@ -561,7 +556,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const emailExists = users.some((u, index) => u.email === email && index !== userIndex);
         if (emailExists) {
             messageEl.className = 'form-message error';
-            messageEl.textContent = '❌ Cet email est déjà utilisé par un autre compte.';
+            messageEl.textContent = 'Cet email est déjà utilisé par un autre compte.';
             messageEl.style.display = 'block';
             return;
         }
@@ -591,7 +586,7 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('currentUser', JSON.stringify(updatedUser));
 
         messageEl.className = 'form-message success';
-        messageEl.textContent = '✅ Profil mis à jour avec succès !';
+        messageEl.textContent = 'Profil mis à jour avec succès !';
         messageEl.style.display = 'block';
 
         updateUserUI();
@@ -601,10 +596,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     };
 
-    // ========================================
-    // ===== CLIENT: SERVICES ACHETÉS =====
-    // ========================================
-
+    // Consultation des services achetés par le client
     window.loadClientServices = function() {
         const currentUser = getCurrentUser();
         if (!currentUser) {
@@ -651,10 +643,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `).join('');
     };
 
-    // ========================================
-    // ===== CLIENT: HISTORIQUE PAIEMENTS =====
-    // ========================================
-
+    // Historique des paiements du client
     window.loadPaymentHistory = function() {
         const currentUser = getCurrentUser();
         if (!currentUser) {
@@ -694,10 +683,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `).join('');
     };
 
-    // ========================================
-    // ===== CLIENT: DASHBOARD STATS =====
-    // ========================================
-
+    // Statistiques du tableau de bord client
     window.loadClientStats = function() {
         if (!protectClientPage()) return;
 
@@ -732,10 +718,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // ========================================
-    // ===== ADMIN: SWITCH TABS =====
-    // ========================================
-
+    // Changement d'onglet dans le tableau de bord admin
     window.switchAdminTab = function(tabId) {
         const panels = document.querySelectorAll('.admin-panel');
         panels.forEach(panel => {
@@ -770,10 +753,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // ========================================
-    // ===== ADMIN: PARAMÈTRES =====
-    // ========================================
-
+    // Paramètres admin
     window.loadAdminSettings = function() {
         if (!protectAdminPage()) return;
         
@@ -801,7 +781,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!protectAdminPage()) return;
         
         if (!window.adminPhotoData) {
-            alert('❌ Veuillez choisir une photo.');
+            alert('Veuillez choisir une photo.');
             return;
         }
         
@@ -810,7 +790,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const userIndex = users.findIndex(u => u.id === currentUser.id);
         
         if (userIndex === -1) {
-            alert('❌ Utilisateur non trouvé.');
+            alert('Utilisateur non trouvé.');
             return;
         }
         
@@ -828,7 +808,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         localStorage.setItem('currentUser', JSON.stringify(updatedUser));
         
-        alert('✅ Photo mise à jour avec succès !');
+        alert('Photo mise à jour avec succès !');
         window.adminPhotoData = '';
         updateUserUI();
         loadAdminSettings();
@@ -847,21 +827,21 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (!currentPassword || !newPassword || !confirmNewPassword) {
             messageEl.className = 'form-message error';
-            messageEl.textContent = '❌ Veuillez remplir tous les champs.';
+            messageEl.textContent = 'Veuillez remplir tous les champs.';
             messageEl.style.display = 'block';
             return;
         }
         
         if (newPassword.length < 8) {
             messageEl.className = 'form-message error';
-            messageEl.textContent = '❌ Le nouveau mot de passe doit contenir au moins 8 caractères.';
+            messageEl.textContent = 'Le nouveau mot de passe doit contenir au moins 8 caractères.';
             messageEl.style.display = 'block';
             return;
         }
         
         if (newPassword !== confirmNewPassword) {
             messageEl.className = 'form-message error';
-            messageEl.textContent = '❌ Les mots de passe ne correspondent pas.';
+            messageEl.textContent = 'Les mots de passe ne correspondent pas.';
             messageEl.style.display = 'block';
             return;
         }
@@ -872,14 +852,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (userIndex === -1) {
             messageEl.className = 'form-message error';
-            messageEl.textContent = '❌ Utilisateur non trouvé.';
+            messageEl.textContent = 'Utilisateur non trouvé.';
             messageEl.style.display = 'block';
             return;
         }
         
         if (users[userIndex].password !== currentPassword) {
             messageEl.className = 'form-message error';
-            messageEl.textContent = '❌ Mot de passe actuel incorrect.';
+            messageEl.textContent = 'Mot de passe actuel incorrect.';
             messageEl.style.display = 'block';
             return;
         }
@@ -899,7 +879,7 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('currentUser', JSON.stringify(updatedUser));
         
         messageEl.className = 'form-message success';
-        messageEl.textContent = '✅ Mot de passe modifié avec succès !';
+        messageEl.textContent = 'Mot de passe modifié avec succès !';
         messageEl.style.display = 'block';
         
         document.getElementById('settingsForm').reset();
@@ -909,10 +889,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 4000);
     };
 
-    // ========================================
-    // ===== ADMIN: GÉRER LES CLIENTS =====
-    // ========================================
-
+    // Gestion des clients par l'administrateur
     window.loadAdminClients = function() {
         if (!protectAdminPage()) return;
 
@@ -945,7 +922,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         <i class="fas ${client.statut === 'actif' ? 'fa-ban' : 'fa-check'}"></i>
                         ${client.statut === 'actif' ? 'Bloquer' : 'Débloquer'}
                     </button>
-                    <!-- BOUTON PROMOUVOIR EN ADMIN -->
                     <button class="btn-small btn-promote" onclick="promoteToAdmin('${client.id}')">
                         <i class="fas fa-user-shield"></i> Promouvoir Admin
                     </button>
@@ -954,10 +930,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `).join('');
     };
 
-    // ========================================
-    // ===== ADMIN: GÉRER LES SERVICES =====
-    // ========================================
-
+    // Gestion des services par l'administrateur
     window.loadAdminServices = function() {
         if (!protectAdminPage()) return;
 
@@ -1003,7 +976,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!nom || !description || isNaN(prix) || prix <= 0) {
             messageEl.className = 'form-message error';
-            messageEl.textContent = '❌ Veuillez remplir tous les champs correctement.';
+            messageEl.textContent = 'Veuillez remplir tous les champs correctement.';
             messageEl.style.display = 'block';
             return;
         }
@@ -1022,7 +995,7 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('services', JSON.stringify(services));
 
         messageEl.className = 'form-message success';
-        messageEl.textContent = '✅ Service ajouté avec succès !';
+        messageEl.textContent = 'Service ajouté avec succès !';
         messageEl.style.display = 'block';
 
         document.getElementById('serviceForm').reset();
@@ -1033,20 +1006,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     };
 
-    // ========================================
-    // ===== ADMIN: EDITER UN SERVICE =====
-    // ========================================
-
+    // Modification d'un service
     window.editService = function(serviceId) {
         const services = JSON.parse(localStorage.getItem('services')) || [];
         const service = services.find(s => s.id === serviceId);
         
         if (!service) {
-            alert('❌ Service non trouvé.');
+            alert('Service non trouvé.');
             return;
         }
 
-        // Remplir le formulaire de modification
         document.getElementById('editServiceId').value = serviceId;
         document.getElementById('editServiceNom').value = service.nom || '';
         document.getElementById('editServiceDescription').value = service.description || '';
@@ -1054,19 +1023,13 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('editServiceCategorie').value = service.categorie || 'Développement';
         document.getElementById('editServiceStatut').value = service.statut || 'actif';
         
-        // Effacer ancien message
         const messageEl = document.getElementById('editServiceMessage');
         messageEl.style.display = 'none';
         messageEl.className = 'form-message';
         messageEl.textContent = '';
 
-        // Ouvrir le modal
         document.getElementById('editServiceModal').classList.add('open');
     };
-
-    // ========================================
-    // ===== ADMIN: SAUVEGARDER MODIFICATION SERVICE =====
-    // ========================================
 
     window.saveServiceEdit = function() {
         const serviceId = document.getElementById('editServiceId').value;
@@ -1080,10 +1043,9 @@ document.addEventListener('DOMContentLoaded', function() {
         messageEl.style.display = 'none';
         messageEl.className = 'form-message';
 
-        // Validasyon
         if (!nom || !description || isNaN(prix) || prix <= 0) {
             messageEl.className = 'form-message error';
-            messageEl.textContent = '❌ Veuillez remplir tous les champs correctement.';
+            messageEl.textContent = 'Veuillez remplir tous les champs correctement.';
             messageEl.style.display = 'block';
             return;
         }
@@ -1093,12 +1055,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (index === -1) {
             messageEl.className = 'form-message error';
-            messageEl.textContent = '❌ Service non trouvé.';
+            messageEl.textContent = 'Service non trouvé.';
             messageEl.style.display = 'block';
             return;
         }
 
-        // Mete ajou
         services[index].nom = nom;
         services[index].description = description;
         services[index].prix = prix;
@@ -1108,13 +1069,11 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('services', JSON.stringify(services));
 
         messageEl.className = 'form-message success';
-        messageEl.textContent = '✅ Service modifié avec succès !';
+        messageEl.textContent = 'Service modifié avec succès !';
         messageEl.style.display = 'block';
 
-        // Recharge lis la
         loadAdminServices();
 
-        // Fèmen modal apre 1.5 segonn
         setTimeout(() => {
             document.getElementById('editServiceModal').classList.remove('open');
             messageEl.style.display = 'none';
@@ -1128,13 +1087,10 @@ document.addEventListener('DOMContentLoaded', function() {
         services = services.filter(s => s.id !== serviceId);
         localStorage.setItem('services', JSON.stringify(services));
         loadAdminServices();
-        alert('✅ Service supprimé avec succès.');
+        alert('Service supprimé avec succès.');
     };
 
-    // ========================================
-    // ===== ADMIN: CONSULTER PAIEMENTS =====
-    // ========================================
-
+    // Consultation des paiements par l'administrateur
     window.loadAdminPayments = function() {
         if (!protectAdminPage()) return;
 
@@ -1162,10 +1118,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `).join('');
     };
 
-    // ========================================
-    // ===== ADMIN: CONSULTER MESSAGES =====
-    // ========================================
-
+    // Consultation des messages par l'administrateur
     window.loadAdminMessages = function() {
         if (!protectAdminPage()) return;
 
@@ -1225,14 +1178,12 @@ document.addEventListener('DOMContentLoaded', function() {
         loadAdminMessages();
     };
 
-    // ========================================
-    // ===== ADMIN: GÉRER UTILISATEURS =====
-    // ========================================
-
+    // Gestion des utilisateurs par l'administrateur
     window.loadAdminUsers = function() {
         if (!protectAdminPage()) return;
 
         const users = JSON.parse(localStorage.getItem('users')) || [];
+        const currentUser = getCurrentUser();
         const container = document.getElementById('adminUsers');
 
         if (!container) return;
@@ -1243,32 +1194,51 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         container.innerHTML = users.map(user => {
-            // === KONTRENT 1: Admin pa ka bloke lòt Admin ===
             const isAdmin = user.role === 'admin';
-            const currentUser = getCurrentUser();
+            const isDefaultAdmin = user.email === 'kazotech@gmail.com';
             const isCurrentUser = currentUser && currentUser.id === user.id;
+            const canManageAdmin = currentUser && currentUser.email === 'kazotech@gmail.com';
 
             let actionsHtml = '';
 
-            // Si se yon admin, pa montre bouton bloke
-            if (!isAdmin) {
+            if (isAdmin) {
+                if (isDefaultAdmin) {
+                    actionsHtml = `
+                        <span style="font-size: 12px; color: #ffc107;">
+                            <i class="fas fa-crown"></i> Administrateur Principal
+                        </span>
+                    `;
+                } else {
+                    if (canManageAdmin && !isDefaultAdmin && !isCurrentUser) {
+                        actionsHtml = `
+                            <button class="btn-small btn-revoke" onclick="revokeAdmin('${user.id}')">
+                                <i class="fas fa-user-minus"></i> Révoquer Admin
+                            </button>
+                            <button class="btn-small" onclick="toggleUserStatus('${user.id}')">
+                                <i class="fas ${user.statut === 'actif' ? 'fa-ban' : 'fa-check'}"></i>
+                                ${user.statut === 'actif' ? 'Bloquer' : 'Débloquer'}
+                            </button>
+                        `;
+                    } else if (isCurrentUser) {
+                        actionsHtml = `
+                            <span style="font-size: 12px; color: var(--text-gray);">
+                                <i class="fas fa-user"></i> Vous
+                            </span>
+                        `;
+                    } else {
+                        actionsHtml = `
+                            <span style="font-size: 12px; color: var(--text-gray);">
+                                <i class="fas fa-shield-alt"></i> Administrateur
+                            </span>
+                        `;
+                    }
+                }
+            } else {
                 actionsHtml = `
                     <button class="btn-small" onclick="toggleUserStatus('${user.id}')">
                         <i class="fas ${user.statut === 'actif' ? 'fa-ban' : 'fa-check'}"></i>
                         ${user.statut === 'actif' ? 'Bloquer' : 'Débloquer'}
                     </button>
-                `;
-            } else {
-                actionsHtml = `
-                    <span style="font-size: 12px; color: var(--text-gray);">
-                        <i class="fas fa-shield-alt"></i> Administrateur
-                    </span>
-                `;
-            }
-
-            // Bouton promouvoir (sèlman si se yon client)
-            if (!isAdmin) {
-                actionsHtml += `
                     <button class="btn-small btn-promote" onclick="promoteToAdmin('${user.id}')">
                         <i class="fas fa-user-shield"></i> Promouvoir Admin
                     </button>
@@ -1278,7 +1248,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return `
                 <div class="admin-user-card">
                     <div class="user-info">
-                        <h4>${user.prenom} ${user.nom} ${isAdmin ? '⭐' : ''}</h4>
+                        <h4>
+                            ${user.prenom} ${user.nom} 
+                            ${isAdmin ? '⭐' : ''}
+                            ${isDefaultAdmin ? '👑' : ''}
+                        </h4>
                         <p><i class="fas fa-envelope"></i> ${user.email}</p>
                         <p><i class="fas fa-user-tag"></i> ${user.role}</p>
                         <p><span class="status-badge ${user.statut}">${user.statut}</span></p>
@@ -1291,29 +1265,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }).join('');
     };
 
-    // ========================================
-    // ===== TOGGLE USER STATUS (BLOQUER/DEBLOQUER) =====
-    // ========================================
-
+    // Bloquer ou débloquer un utilisateur
     window.toggleUserStatus = function(userId) {
         const users = JSON.parse(localStorage.getItem('users')) || [];
         const currentUser = getCurrentUser();
         const index = users.findIndex(u => u.id === userId);
         
         if (index === -1) {
-            alert('❌ Utilisateur non trouvé.');
+            alert('Utilisateur non trouvé.');
             return;
         }
 
-        // === KONTRENT 1: Admin pa ka bloke yon lòt Admin ===
+        // Seul l'administrateur principal peut bloquer un autre administrateur
         if (users[index].role === 'admin') {
-            alert('❌ Vous ne pouvez pas bloquer un administrateur.');
-            return;
+            if (!currentUser || currentUser.email !== 'kazotech@gmail.com') {
+                alert('Seul l\'administrateur principal (kazotech@gmail.com) peut bloquer un administrateur.');
+                return;
+            }
         }
 
-        // Si li deja admin, pa montre opsyon bloke
-        if (users[index].role === 'admin') {
-            alert('❌ Cette action n\'est pas autorisée sur un administrateur.');
+        // L'administrateur principal ne peut pas se bloquer lui-même
+        if (users[index].id === currentUser.id && currentUser.email === 'kazotech@gmail.com') {
+            alert('Vous ne pouvez pas bloquer votre propre compte.');
             return;
         }
 
@@ -1322,19 +1295,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         loadAdminClients();
         loadAdminUsers();
-        alert(`✅ Utilisateur ${users[index].statut === 'actif' ? 'débloqué' : 'bloqué'} avec succès.`);
+        alert(`Utilisateur ${users[index].statut === 'actif' ? 'débloqué' : 'bloqué'} avec succès.`);
     };
 
-    // ========================================
-    // ===== PROMOUVOIR CLIENT EN ADMIN =====
-    // ========================================
-
+    // Promouvoir un client en administrateur
     window.promoteToAdmin = function(userId) {
         const currentUser = getCurrentUser();
         
-        // Verifye si admin konekte
         if (!currentUser || currentUser.role !== 'admin') {
-            alert('❌ Accès refusé. Vous devez être administrateur.');
+            alert('Accès refusé. Vous devez être administrateur.');
             return;
         }
 
@@ -1342,40 +1311,83 @@ document.addEventListener('DOMContentLoaded', function() {
         const index = users.findIndex(u => u.id === userId);
         
         if (index === -1) {
-            alert('❌ Utilisateur non trouvé.');
+            alert('Utilisateur non trouvé.');
             return;
         }
 
-        // === KONTRENT 2: Si deja admin, pa bezwen chanje ===
         if (users[index].role === 'admin') {
-            alert('ℹ️ Cet utilisateur est déjà administrateur.');
+            alert('Cet utilisateur est déjà administrateur.');
             return;
         }
 
-        // Konfimasyon
         const confirmAction = confirm(
-            `⚠️ Êtes-vous sûr de vouloir promouvoir "${users[index].prenom} ${users[index].nom}" en administrateur ?\n\n` +
+            `Êtes-vous sûr de vouloir promouvoir "${users[index].prenom} ${users[index].nom}" en administrateur ?\n\n` +
             `Cette action est irréversible.`
         );
 
         if (!confirmAction) return;
 
-        // Chanje role
         users[index].role = 'admin';
         localStorage.setItem('users', JSON.stringify(users));
 
-        // Recharge lis yo
         loadAdminClients();
         loadAdminUsers();
         loadAdminStats();
 
-        alert(`✅ "${users[index].prenom} ${users[index].nom}" est maintenant administrateur.`);
+        alert(`"${users[index].prenom} ${users[index].nom}" est maintenant administrateur.`);
     };
 
-    // ========================================
-    // ===== ADMIN: STATISTIQUES =====
-    // ========================================
+    // Révoquer les droits d'administrateur
+    window.revokeAdmin = function(userId) {
+        const currentUser = getCurrentUser();
+        
+        if (!currentUser || currentUser.role !== 'admin') {
+            alert('Accès refusé. Vous devez être administrateur.');
+            return;
+        }
 
+        // Seul l'administrateur principal peut révoquer les droits d'un administrateur
+        if (currentUser.email !== 'kazotech@gmail.com') {
+            alert('Seul l\'administrateur principal (kazotech@gmail.com) peut révoquer les droits d\'un administrateur.');
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const index = users.findIndex(u => u.id === userId);
+        
+        if (index === -1) {
+            alert('Utilisateur non trouvé.');
+            return;
+        }
+
+        if (users[index].role !== 'admin') {
+            alert('Cet utilisateur n\'est pas administrateur.');
+            return;
+        }
+
+        if (users[index].id === currentUser.id) {
+            alert('Vous ne pouvez pas révoquer vos propres droits.');
+            return;
+        }
+
+        const confirmAction = confirm(
+            `Êtes-vous sûr de vouloir révoquer les droits d'administrateur de "${users[index].prenom} ${users[index].nom}" ?\n\n` +
+            `Cet utilisateur deviendra un client normal.`
+        );
+
+        if (!confirmAction) return;
+
+        users[index].role = 'client';
+        localStorage.setItem('users', JSON.stringify(users));
+
+        loadAdminClients();
+        loadAdminUsers();
+        loadAdminStats();
+
+        alert(`"${users[index].prenom} ${users[index].nom}" n'est plus administrateur.`);
+    };
+
+    // Statistiques du tableau de bord admin
     window.loadAdminStats = function() {
         if (!protectAdminPage()) return;
 
@@ -1425,10 +1437,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // ========================================
-    // ===== CHARGEMENT DES SERVICES (PRICING) =====
-    // ========================================
-
+    // Chargement des services sur la page des tarifs
     window.loadServices = function() {
         const grid = document.getElementById('pricingGrid');
         if (!grid) return;
@@ -1472,7 +1481,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         ];
 
-        // Sauvegarder les services dans localStorage
         localStorage.setItem('services', JSON.stringify(services));
 
         grid.innerHTML = services.map(service => `
@@ -1490,10 +1498,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `).join('');
     };
 
-    // ========================================
-    // ===== CONTACT (SAUVEGARDE) =====
-    // ========================================
-
+    // Gestion des messages de contact
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -1517,7 +1522,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const messageEl = document.getElementById('formMessage');
             messageEl.className = 'form-message success';
-            messageEl.textContent = '✅ Votre message a été envoyé avec succès !';
+            messageEl.textContent = 'Votre message a été envoyé avec succès !';
             messageEl.style.display = 'block';
 
             this.reset();
@@ -1528,26 +1533,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ========================================
-    // ===== PAIEMENT - AVEC KONTRENT KONEKSYON =====
-    // ========================================
-
+    // Gestion du paiement
     const paymentForm = document.getElementById('paymentForm');
     if (paymentForm) {
         paymentForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Verifye si itilizatè a konekte
             const currentUser = getCurrentUser();
             if (!currentUser) {
-                alert('⚠️ Vous devez être connecté pour effectuer un paiement.');
+                alert('Vous devez être connecté pour effectuer un paiement.');
                 window.location.href = 'signin.html';
                 return;
             }
 
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             if (cart.length === 0) {
-                alert('❌ Votre panier est vide.');
+                alert('Votre panier est vide.');
                 return;
             }
 
@@ -1592,10 +1593,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ========================================
-    // ===== FERMER MODAL =====
-    // ========================================
-
+    // Fermeture des modales
     window.closeModal = function() {
         document.getElementById('confirmationModal')?.classList.remove('open');
         document.getElementById('editServiceModal')?.classList.remove('open');
@@ -1609,10 +1607,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target === this) this.classList.remove('open');
     });
 
-    // ========================================
-    // ===== PANIER - AVEC KONTRENT KONEKSYON =====
-    // ========================================
-
+    // Gestion du panier
     function updateCartDisplay() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const total = cart.reduce((sum, item) => sum + item.price, 0);
@@ -1667,11 +1662,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     window.addToCart = function(serviceId) {
-        // Verifye si itilizatè a konekte anvan ajoute nan panier
         const currentUser = getCurrentUser();
         if (!currentUser) {
             const confirmAction = confirm(
-                '⚠️ Vous devez être connecté pour ajouter des services à votre panier.\n\n' +
+                'Vous devez être connecté pour ajouter des services à votre panier.\n\n' +
                 'Cliquez sur "OK" pour vous connecter ou "Annuler" pour rester sur cette page.'
             );
             if (confirmAction) {
@@ -1688,7 +1682,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         
         if (cart.find(item => item.id === serviceId)) {
-            alert('⚠️ Ce service est déjà dans votre panier.');
+            alert('Ce service est déjà dans votre panier.');
             return;
         }
 
@@ -1701,7 +1695,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartDisplay();
-        alert(`✅ "${service.nom}" a été ajouté à votre panier !`);
+        alert(`"${service.nom}" a été ajouté à votre panier !`);
     };
 
     window.removeFromCart = function(serviceId) {
@@ -1711,15 +1705,12 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCartDisplay();
     };
 
-    // ========================================
-    // ===== BOUTON PROCÉDER AU PAIEMENT - AVEC KONTRENT =====
-    // ========================================
-
+    // Bouton pour procéder au paiement
     document.getElementById('checkoutBtn')?.addEventListener('click', function(e) {
         const currentUser = getCurrentUser();
         if (!currentUser) {
             e.preventDefault();
-            alert('⚠️ Vous devez être connecté pour procéder au paiement.');
+            alert('Vous devez être connecté pour procéder au paiement.');
             window.location.href = 'signin.html';
             return;
         }
@@ -1727,18 +1718,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         if (cart.length === 0) {
             e.preventDefault();
-            alert('❌ Votre panier est vide.');
+            alert('Votre panier est vide.');
             return;
         }
-        // Redirection normale vers paynow.html
     });
 
-    // ========================================
-    // ===== SWITCH METHODE DE PAIEMENT =====
-    // ========================================
-
+    // Changement de méthode de paiement
     window.switchPaymentMethod = function(method) {
-        // Met ajou bouton aktif
         const methods = document.querySelectorAll('.payment-method');
         methods.forEach(btn => {
             btn.classList.remove('active');
@@ -1747,7 +1733,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Montre detal ki koresponn
         const details = document.querySelectorAll('.payment-details');
         details.forEach(detail => {
             detail.classList.remove('active');
@@ -1759,27 +1744,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // ========================================
-    // ===== PROCESS PAYPAL =====
-    // ========================================
-
+    // Paiement avec PayPal
     window.processPayPal = function() {
         const currentUser = getCurrentUser();
         if (!currentUser) {
-            alert('⚠️ Vous devez être connecté pour effectuer un paiement.');
+            alert('Vous devez être connecté pour effectuer un paiement.');
             window.location.href = 'signin.html';
             return;
         }
 
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         if (cart.length === 0) {
-            alert('❌ Votre panier est vide.');
+            alert('Votre panier est vide.');
             return;
         }
 
-        // Simule redireksyon PayPal
         const confirmPay = confirm(
-            '🔵 Vous allez être redirigé vers PayPal.\n\n' +
+            'Vous allez être redirigé vers PayPal.\n\n' +
             'Montant total: ' + cart.reduce((sum, item) => sum + item.price, 0).toFixed(2) + ' $\n\n' +
             'Cliquez sur "OK" pour continuer.'
         );
@@ -1791,27 +1772,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // ========================================
-    // ===== PROCESS STRIPE =====
-    // ========================================
-
+    // Paiement avec Stripe
     window.processStripe = function() {
         const currentUser = getCurrentUser();
         if (!currentUser) {
-            alert('⚠️ Vous devez être connecté pour effectuer un paiement.');
+            alert('Vous devez être connecté pour effectuer un paiement.');
             window.location.href = 'signin.html';
             return;
         }
 
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         if (cart.length === 0) {
-            alert('❌ Votre panier est vide.');
+            alert('Votre panier est vide.');
             return;
         }
 
-        // Simule redireksyon Stripe
         const confirmPay = confirm(
-            '💳 Vous allez être redirigé vers Stripe.\n\n' +
+            'Vous allez être redirigé vers Stripe.\n\n' +
             'Montant total: ' + cart.reduce((sum, item) => sum + item.price, 0).toFixed(2) + ' $\n\n' +
             'Cliquez sur "OK" pour continuer.'
         );
@@ -1823,17 +1800,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // ========================================
-    // ===== COMPLETE PAYMENT =====
-    // ========================================
-
+    // Finalisation du paiement
     function completePayment(method) {
         const currentUser = getCurrentUser();
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const total = cart.reduce((sum, item) => sum + item.price, 0);
         const transactionId = 'TXN-' + Date.now();
 
-        // Sauvegarder la commande
         const orders = JSON.parse(localStorage.getItem('orders')) || [];
         orders.push({
             id: 'order_' + Date.now(),
@@ -1847,7 +1820,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         localStorage.setItem('orders', JSON.stringify(orders));
 
-        // Sauvegarder le paiement
         const payments = JSON.parse(localStorage.getItem('payments')) || [];
         cart.forEach(item => {
             payments.push({
@@ -1864,22 +1836,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         localStorage.setItem('payments', JSON.stringify(payments));
 
-        // Afiche konfimasyon
         document.getElementById('transactionId').textContent = transactionId;
         document.getElementById('receiptAmount').textContent = total.toFixed(2);
         document.getElementById('receiptDate').textContent = new Date().toLocaleString();
         document.getElementById('receiptMethod').textContent = method;
         document.getElementById('confirmationModal').classList.add('open');
 
-        // Vide panier
         localStorage.removeItem('cart');
         updateCartDisplay();
     }
 
-    // ========================================
-    // ===== INITIALISATION =====
-    // ========================================
-
+    // Initialisation
     updateUserUI();
     updateCartDisplay();
 
