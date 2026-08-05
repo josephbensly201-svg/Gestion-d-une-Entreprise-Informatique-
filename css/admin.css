@@ -1,8 +1,4 @@
-/* ========================================
-   ADMIN.CSS - STYLES DASHBOARD ADMIN
-   ======================================== */
-
-/* === STATISTIQUES === */
+/* STATISTIQUES  */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -405,5 +401,28 @@
 .admin-user-card .user-info h4 .fa-star {
     color: #ffc107;
     font-size: 14px;
+    margin-left: 5px;
+}
+
+/* BOUTON REVOKE ADMIN */
+
+.btn-revoke {
+    background: #dc3545 !important;
+    color: #ffffff !important;
+}
+
+.btn-revoke:hover {
+    background: #c82333 !important;
+    color: #ffffff !important;
+}
+
+.btn-revoke i {
+    color: #ffffff !important;
+}
+
+/* Admin Principal badge */
+.admin-user-card .user-info h4 .fa-crown {
+    color: #ffc107;
+    font-size: 16px;
     margin-left: 5px;
 }
