@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Kazo_Tech</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <div class="logo-container">
+                    <img src="assets/images/KZ Tech.png" alt="Logo KZ Tech" style="height: 45px; width: auto; margin-right: 10px;">
+                    <h1>Kazo<span>_Tech</span></h1>
+                </div>
+            </a>
+            <div class="top-nav-right" id="navRight">
+                <a href="#" class="btn-login" id="loginBtn">
+                    <i class="fas fa-user"></i> Connexion
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> HOME</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> ABOUT</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tags"></i> PRICING</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a></li>
+                <li><a href="paynow.html" class="active"><i class="fas fa-credit-card"></i> PAY NOW</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Dashboard <span>Administrateur</span></h1>
+            <p>Gérez l'ensemble de votre plateforme</p>
+        </div>
+    </section>
+
+    <!-- STATISTIQUES -->
+    <section class="admin-section">
+        <div class="container">
+            <div id="adminStats" class="stats-grid"></div>
+        </div>
+    </section>
+
+    <!-- TABS ADMIN -->
+    <section class="admin-section">
+        <div class="container">
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="clients" onclick="switchAdminTab('clients')">
+                    <i class="fas fa-users"></i> Clients
+                </button>
+                <button class="admin-tab" data-tab="services" onclick="switchAdminTab('services')">
+                    <i class="fas fa-cogs"></i> Services
+                </button>
+                <button class="admin-tab" data-tab="payments" onclick="switchAdminTab('payments')">
+                    <i class="fas fa-credit-card"></i> Paiements
+                </button>
+                <button class="admin-tab" data-tab="messages" onclick="switchAdminTab('messages')">
+                    <i class="fas fa-envelope"></i> Messages
+                </button>
+                <button class="admin-tab" data-tab="users" onclick="switchAdminTab('users')">
+                    <i class="fas fa-user-cog"></i> Utilisateurs
+                </button>
+                <button class="admin-tab" data-tab="settings" onclick="switchAdminTab('settings')">
+                    <i class="fas fa-cog"></i> Paramètres
+                </button>
+                <!-- BOUTON DECONNEXION AKOTE PARAMETRES -->
+                <button class="admin-tab logout-tab" onclick="logout()" style="color: #dc3545; border-left: 1px solid rgba(255,255,255,0.1);">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>
+            </div>
+
+            <!-- CLIENTS -->
+            <div id="clients" class="admin-panel active">
+                <h3><i class="fas fa-users"></i> Gestion des clients</h3>
+                <div id="adminClients"></div>
+            </div>
+
+            <!-- SERVICES -->
+            <div id="services" class="admin-panel">
+                <h3><i class="fas fa-cogs"></i> Gestion des services</h3>
+                <div class="add-service-form">
+                    <h4>Ajouter un service</h4>
+                    <form id="serviceForm" onsubmit="event.preventDefault(); addService();">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="serviceNom">Nom du service</label>
+                                <input type="text" id="serviceNom" placeholder="Développement Web" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="servicePrix">Prix ($)</label>
+                                <input type="number" id="servicePrix" placeholder="800" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceDescription">Description</label>
+                            <textarea id="serviceDescription" rows="2" placeholder="Description du service" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceCategorie">Catégorie</label>
+                            <select id="serviceCategorie">
+                                <option value="Développement">Développement</option>
+                                <option value="Base de données">Base de données</option>
+                                <option value="Sécurité">Sécurité</option>
+                                <option value="Consultation">Consultation</option>
+                                <option value="Infrastructure">Infrastructure</option>
+                            </select>
+                        </div>
+                        <div id="serviceMessage" class="form-message"></div>
+                        <button type="button" class="btn-primary" onclick="addService()">
+                            <i class="fas fa-plus"></i> Ajouter le service
+                        </button>
+                    </form>
+                </div>
+                <div id="adminServices"></div>
+            </div>
+
+            <!-- PAIEMENTS -->
+            <div id="payments" class="admin-panel">
+                <h3><i class="fas fa-credit-card"></i> Consulter les paiements</h3>
+                <div id="adminPayments"></div>
+            </div>
+
+            <!-- MESSAGES -->
+            <div id="messages" class="admin-panel">
+                <h3><i class="fas fa-envelope"></i> Messages reçus</h3>
+                <div id="adminMessages"></div>
+            </div>
+
+            <!-- UTILISATEURS -->
+            <div id="users" class="admin-panel">
+                <h3><i class="fas fa-user-cog"></i> Gérer les utilisateurs</h3>
+                <div id="adminUsers"></div>
+            </div>
+
+            <!-- PARAMÈTRES -->
+            <div id="settings" class="admin-panel">
+                <h3><i class="fas fa-cog"></i> Paramètres du compte</h3>
+                <div class="settings-form">
+                    <h4>Changer le mot de passe</h4>
+                    <form id="settingsForm" onsubmit="event.preventDefault(); changeAdminPassword();">
+                        <div class="form-group">
+                            <label for="currentPassword">Mot de passe actuel</label>
+                            <input type="password" id="currentPassword" placeholder="Entrez votre mot de passe actuel" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="newPassword">Nouveau mot de passe</label>
+                                <input type="password" id="newPassword" placeholder="Minimum 8 caractères" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmNewPassword">Confirmer le nouveau mot de passe</label>
+                                <input type="password" id="confirmNewPassword" placeholder="Confirmer" required>
+                            </div>
+                        </div>
+                        <div id="settingsMessage" class="form-message"></div>
+                        <button type="button" class="btn-primary" onclick="changeAdminPassword()">
+                            <i class="fas fa-save"></i> Mettre à jour le mot de passe
+                        </button>
+                    </form>
+                </div>
+
+                <div class="settings-info" style="margin-top: 30px; padding: 20px; background: var(--light-bg); border-radius: var(--radius);">
+                    <h4><i class="fas fa-info-circle"></i> Informations du compte</h4>
+                    <div id="adminInfo">
+                        <p><strong>Nom:</strong> <span id="adminNom"></span></p>
+                        <p><strong>Prénom:</strong> <span id="adminPrenom"></span></p>
+                        <p><strong>Email:</strong> <span id="adminEmail"></span></p>
+                        <p><strong>Rôle:</strong> <span class="status-badge actif">Administrateur</span></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MODAL EDIT SERVICE -->
+    <div id="editServiceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Modifier le service</h2>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editServiceId">
+                <div class="form-group">
+                    <label for="editServiceNom">Nom</label>
+                    <input type="text" id="editServiceNom" required>
+                </div>
+                <div class="form-group">
+                    <label for="editServiceDescription">Description</label>
+                    <textarea id="editServiceDescription" rows="2" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editServicePrix">Prix ($)</label>
+                        <input type="number" id="editServicePrix" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editServiceCategorie">Catégorie</label>
+                        <select id="editServiceCategorie">
+                            <option value="Développement">Développement</option>
+                            <option value="Base de données">Base de données</option>
+                            <option value="Sécurité">Sécurité</option>
+                            <option value="Consultation">Consultation</option>
+                            <option value="Infrastructure">Infrastructure</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editServiceStatut">Statut</label>
+                    <select id="editServiceStatut">
+                        <option value="actif">Actif</option>
+                        <option value="inactif">Inactif</option>
+                    </select>
+                </div>
+                <div id="editServiceMessage" class="form-message"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal()">Annuler</button>
+                <button class="btn-primary" onclick="saveServiceEdit()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kazo_Tech</h3>
+                    <p>Votre partenaire de confiance pour vos solutions informatiques.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="pricing.html">Développement Web</a></li>
+                        <li><a href="pricing.html">Base de Données</a></li>
+                        <li><a href="pricing.html">Sécurité</a></li>
+                        <li><a href="pricing.html">Consultation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="index.html">HOMME</a></li>
+                        <li><a href="about.html">ABOUT</a></li>
+                        <li><a href="contact.html">CONTACT</a></li>
+                        <li><a href="signin.html">SIGNIN</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> +509 41460815</p>
+                    <p><i class="fas fa-envelope"></i> KazoTech@.ht</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Cap-Haitien, Haïti</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kazo_Tech. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

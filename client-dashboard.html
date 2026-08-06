@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Client - Kazo_Tech</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <div class="logo-container">
+                    <img src="assets/images/KZ Tech.png" alt="Logo KZ Tech" style="height: 45px; width: auto; margin-right: 10px;">
+                    <h1>Kazo<span>_Tech</span></h1>
+                </div>
+            </a>
+            <div class="top-nav-right" id="navRight">
+                <a href="#" class="btn-login" id="loginBtn">
+                    <i class="fas fa-user"></i> Connexion
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> À Propos</a></li>
+                <li><a href="client-dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profil</a></li>
+                <li><a href="client-services.html"><i class="fas fa-shopping-bag"></i> Mes services</a></li>
+                <li><a href="payment-history.html"><i class="fas fa-credit-card"></i> Historique</a></li>
+                <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Mon <span>Dashboard</span></h1>
+            <p>Bienvenue dans votre espace client</p>
+        </div>
+    </section>
+
+    <!-- STATISTIQUES CLIENT -->
+    <section class="admin-section">
+        <div class="container">
+            <div id="clientStats" class="stats-grid"></div>
+        </div>
+    </section>
+
+    <!-- RACCORCIS RAPIDES -->
+    <section class="admin-section">
+        <div class="container">
+            <div class="quick-actions">
+                <h3>Actions rapides</h3>
+                <div class="quick-grid">
+                    <a href="profile.html" class="quick-card">
+                        <i class="fas fa-user-edit"></i>
+                        <span>Modifier mon profil</span>
+                    </a>
+                    <a href="pricing.html" class="quick-card">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Acheter un service</span>
+                    </a>
+                    <a href="client-services.html" class="quick-card">
+                        <i class="fas fa-list"></i>
+                        <span>Voir mes services</span>
+                    </a>
+                    <a href="payment-history.html" class="quick-card">
+                        <i class="fas fa-history"></i>
+                        <span>Historique paiements</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kazo_Tech</h3>
+                    <p>Votre partenaire de confiance pour vos solutions informatiques.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="pricing.html">Développement Web</a></li>
+                        <li><a href="pricing.html">Base de Données</a></li>
+                        <li><a href="pricing.html">Sécurité</a></li>
+                        <li><a href="pricing.html">Consultation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="index.html">HOMME</a></li>
+                        <li><a href="about.html">ABOUT</a></li>
+                        <li><a href="contact.html">CONTACT</a></li>
+                        <li><a href="signin.html">SIGNIN</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> +509 41460815</p>
+                    <p><i class="fas fa-envelope"></i> KazoTech@.ht</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Cap-Haitien, Haïti</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kazo_Tech. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
