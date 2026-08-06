@@ -1,0 +1,29 @@
+{
+  "name": "gestion-d-une-entreprise-informatique-",
+  "version": "1.0.0",
+  "description": "KZ Tech - Plateforme de gestion d'entreprise informatique avec système d'authentification, panier, paiement et dashboard administrateur. Développé en HTML, CSS, JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephbensly201-svg/Gestion-d-une-Entreprise-Informatique-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/josephbensly201-svg/Gestion-d-une-Entreprise-Informatique-/issues"
+  },
+  "homepage": "https://github.com/josephbensly201-svg/Gestion-d-une-Entreprise-Informatique-#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.23.2"
+  }
+}
