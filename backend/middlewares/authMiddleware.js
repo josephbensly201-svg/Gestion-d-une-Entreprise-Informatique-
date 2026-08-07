@@ -26,7 +26,7 @@ exports.verifyToken = (req, res, next) => {
 // Verifye si itilizatè a se yon admin
 exports.verifyAdmin = (req, res, next) => {
   if (req.utilisateur.role !== 'admin') {
-    return res.status(403).json({ message: 'Aksè refize, sèlman admin' });
+    return res.status(403).json({ message: 'Accès refusé, seul un administrateur peut effectuer cette action' });
   }
   next();
 };
